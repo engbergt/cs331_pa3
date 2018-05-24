@@ -5,18 +5,24 @@ import string
 with open('myTester.txt') as textFile:
     content = textFile.readlines()
 
+### Remove punctuation & apostrophes ###
+
 noPuncList = []
 
 for ln in content: 
     noPuncList.append(ln.translate(None, string.punctuation))
 
-
-
-# for ln in content: print ln
-
-### Remove punctuation & apostrophes ###
-
 ### Make all lowercase ###
+
+lowerNoPuncList = []
+
+for ln in noPuncList: 
+    lowerNoPuncList.append(ln.lower())
+
+for ln in lowerNoPuncList: 
+    print ln
+
+
 
 ### Form the vocabulary, make a list of all the unique words in the text file in alphabetical order. ###
 
