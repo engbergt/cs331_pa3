@@ -43,6 +43,11 @@ for word in allWords:
 
 ### alphabeticatize the list for easier debugging later ###
 
+alphabetizedWords = []
+
+for word in sorted(uniqueWords):
+    alphabetizedWords.append(word)
+
 
 ### Form the vocabulary ###
 
