@@ -10,12 +10,7 @@ noPuncList = []
 for ln in content: 
     noPuncList.append(ln.translate(None, string.punctuation))
 
-noPuncOrAppost = []
 
-for ln in noPuncList: 
-    noPuncOrAppost.append(ln.strip("'"))
-
-for ln in noPuncList: print ln
 
 # for ln in content: print ln
 
