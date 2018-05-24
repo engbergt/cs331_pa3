@@ -1,11 +1,25 @@
-# Convert each sentance into a feature vector + class label.
+import string
 
-# Remove punctuation & apostrophes
+### Import file data ###
 
-# Make all lowercase
+with open('myTester.txt') as textFile:
+    content = textFile.readlines()
 
-# Form the vocabulary, make a list of all the unique words in the text file in alphabetical order.
+noPuncList = []
 
-# Convert the training AND test data into a set of features based on the vocabulary.
+for ln in content: 
+    noPuncList.append(ln.translate(None, string.punctuation))
 
-# Output the features into files called preprocessed_train.txt & preprocessed_test.txt each w/ the csv vocab at the top plus 'classlabel'
+for ln in noPuncList: print ln
+
+# for ln in content: print ln
+
+### Remove punctuation & apostrophes ###
+
+### Make all lowercase ###
+
+### Form the vocabulary, make a list of all the unique words in the text file in alphabetical order. ###
+
+### Convert the training AND test data into a set of features based on the vocabulary. ###
+
+### Output the features into files called preprocessed_train.txt & preprocessed_test.txt each w/ the csv vocab at the top plus 'classlabel' ###
