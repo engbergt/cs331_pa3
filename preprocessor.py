@@ -47,20 +47,51 @@ with open('myTester.txt') as textFile:
 
 ### Remove punctuation & apostrophes ###
 trainingNoPunc = removePunctuation(trainingSet)
+testNoPunc = removePunctuation(testSet)
+
+testerNoPunc = removePunctuation(myTester)  # test
 
 ### Make all lowercase ###
 trainingLower = lowercaseize(trainingNoPunc)
+testLower = lowercaseize(testNoPunc)
+
+testerLower = lowercaseize(testerNoPunc)  # test
 
 ### Make a list of all the unique words in the text file ###
 traingingWords = makeListOFWords(trainingLower)
 trainingUniqueWords = uniquify(traingingWords)
 
+testerWords = makeListOFWords(testerLower)  # test
+testerUniqueWords = uniquify(testerWords)  # test
+
 ### alphabatize the vocabulary for easier debugging later ###
 vocabulary = alphabetize(trainingUniqueWords)
+
+testerVocab = alphabetize(testerUniqueWords) # test
 
 ### Convert the training AND test data into a set of features based on the vocabulary. ###
 
 
+def featurizer(vocab, reviews):
+    feature = []
+    for review in reviews:
+        vector = []
+        for word in vocab:
+            wordIsInVocab = False
+            for wrd in review.split():
+                if(word == wrd): wordIsInVocab = True
+            vector.append(1) if wordIsInVocab else vector.append(0)
+        feature.append(vector)
+    return feature
 
+
+testFeatures = featurizer(testerVocab, testerLower)
+
+print testFeatures
+
+
+# myFeature = featurizer(["about", "above", "across", "after", "begin"], ["we love about", "yo there", "across the pond", "whats up"])
+
+# print myFeature
 
 ### Output the features into files called preprocessed_train.txt & preprocessed_test.txt each w/ the csv vocab at the top plus 'classlabel' ###
