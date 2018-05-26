@@ -72,6 +72,12 @@ testerVocab = alphabetize(testerUniqueWords) # test
 ### Convert the training AND test data into a set of features based on the vocabulary. ###
 
 
+# def sentamentGrabber(review):
+#     return int( review.split("\t",1)[1].strip('\n') )
+     
+# print sentamentGrabber(testerLower[3])
+
+
 def featurizer(vocab, reviews):
     feature = []
     for review in reviews:
@@ -81,12 +87,12 @@ def featurizer(vocab, reviews):
             for wrd in review.split():
                 if(word == wrd): wordIsInVocab = True
             vector.append(1) if wordIsInVocab else vector.append(0)
+        vector.append(int(review.split("\t",1)[1].strip('\n')))
         feature.append(vector)
     return feature
 
 
 testFeatures = featurizer(testerVocab, testerLower)
-
 print testFeatures
 
 
