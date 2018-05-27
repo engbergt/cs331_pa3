@@ -48,12 +48,12 @@ def featurizer(vocab, reviews):
 def featureFileize(vocab, feature, name):
     f = open(name,"w+")
     for idx, word in enumerate(vocab):
-        f.write(word + ", ")
+        f.write(word + ",")
     f.write("classlabel \n")
     for each in feature:
         for idx, num in enumerate(each):
             f.write(str(num))
-            f.write(", ") if idx != len(each)-1 else f.write("")
+            f.write(",") if idx != len(each)-1 else f.write("")
         f.write("\n")
     f.close()
 
