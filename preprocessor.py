@@ -32,6 +32,19 @@ def alphabetize(arrayOfStrings):
     for word in sorted(arrayOfStrings): vocabulary.append(word)
     return vocabulary
 
+def featurizer(vocab, reviews):
+    feature = []
+    for review in reviews:
+        vector = []
+        for word in vocab:
+            wordIsInVocab = False
+            for wrd in review.split():
+                if(word == wrd): wordIsInVocab = True
+            vector.append(1) if wordIsInVocab else vector.append(0)
+        vector.append(int(review.split("\t",1)[1].strip('\n')))
+        feature.append(vector)
+    return feature
+
 
 ### Import file data ###
 
@@ -70,34 +83,13 @@ vocabulary = alphabetize(trainingUniqueWords)
 testerVocab = alphabetize(testerUniqueWords) # test
 
 ### Convert the training AND test data into a set of features based on the vocabulary. ###
+trainingFeatures = featurizer(vocabulary, trainingLower)
+testFeatures = featurizer(vocabulary, testLower)
 
+testerFeatures = featurizer(testerVocab, testerLower)
+print testerFeatures
 
-# def sentamentGrabber(review):
-#     return int( review.split("\t",1)[1].strip('\n') )
-     
-# print sentamentGrabber(testerLower[3])
-
-
-def featurizer(vocab, reviews):
-    feature = []
-    for review in reviews:
-        vector = []
-        for word in vocab:
-            wordIsInVocab = False
-            for wrd in review.split():
-                if(word == wrd): wordIsInVocab = True
-            vector.append(1) if wordIsInVocab else vector.append(0)
-        vector.append(int(review.split("\t",1)[1].strip('\n')))
-        feature.append(vector)
-    return feature
-
-
-testFeatures = featurizer(testerVocab, testerLower)
-print testFeatures
-
-
-# myFeature = featurizer(["about", "above", "across", "after", "begin"], ["we love about", "yo there", "across the pond", "whats up"])
-
-# print myFeature
 
 ### Output the features into files called preprocessed_train.txt & preprocessed_test.txt each w/ the csv vocab at the top plus 'classlabel' ###
+#def featureFileize(feature):
+    
