@@ -45,6 +45,17 @@ def featurizer(vocab, reviews):
         feature.append(vector)
     return feature
 
+def featureFileize(vocab, feature, name):
+    f = open(name,"w+")
+    for idx, word in enumerate(vocab):
+        f.write(word + ", ")
+    f.write("classlabel \n")
+    for each in feature:
+        for idx, num in enumerate(each):
+            f.write(str(num))
+            f.write(", ") if idx != len(each)-1 else f.write("")
+        f.write("\n")
+    f.close()
 
 ### Import file data ###
 
@@ -86,10 +97,10 @@ testerVocab = alphabetize(testerUniqueWords) # test
 trainingFeatures = featurizer(vocabulary, trainingLower)
 testFeatures = featurizer(vocabulary, testLower)
 
-testerFeatures = featurizer(testerVocab, testerLower)
-print testerFeatures
-
+testerFeatures = featurizer(testerVocab, testerLower)  # test
 
 ### Output the features into files called preprocessed_train.txt & preprocessed_test.txt each w/ the csv vocab at the top plus 'classlabel' ###
-#def featureFileize(feature):
-    
+featureFileize(vocabulary, trainingFeatures, "preprocessed_train.txt")
+featureFileize(vocabulary, testFeatures, "preprocessed_test.txt")
+
+featureFileize(testerVocab, testerFeatures, "tester.txt")  # test
