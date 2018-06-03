@@ -104,3 +104,27 @@ featureFileize(vocabulary, trainingFeatures, "preprocessed_train.txt")
 featureFileize(vocabulary, testFeatures, "preprocessed_test.txt")
 
 featureFileize(testerVocab, testerFeatures, "tester.txt")  # test
+
+
+##############################################
+############ Classification Step #############
+##############################################
+
+print testerFeatures
+
+### Train: Learn parameters used by the classifier from the training data. ###
+
+# P(CD = false) = (# recs in training data w/ CD = false) / (# of records in training data)
+# P(CD = true) = (# recs in training data w/ CD = true) / (# of records in training data)
+
+# Get 4 Probs. for each feature (attribute): 1) ff, ft, tf, tt.. e.g. ff = (# of records w/ Feature = false & CD = false) / (# of records w/ CD = false)
+
+# Inference: alpha * P(CD) * P(feature1|CD) * P(feature2|CD) * ... * P(featureN|CD)
+
+### Test: Classify the data in the testSet.txt data file. ###
+
+# Predict: compare the inference stuff with CD = true to CD = false. The larger of the two is the prediction for CD. May ignore alpha.
+
+### Compare the predicted class label of each sentence in the test data to the actual class label (# correct / total predictions) ###
+
+### Output the accuracy of the naive Bayes classifier ###
